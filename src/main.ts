@@ -81,4 +81,3 @@ bootstrapApplication(App, {
     provideAnimationsAsync(),
   ],
 }).catch((err) => console.error(err));
-
