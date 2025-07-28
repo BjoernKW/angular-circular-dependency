@@ -11,7 +11,7 @@ export function provideJwt() {
           tokenGetter: () => {
             return localStorage.getItem("access_token");
           },
-          allowedDomains: ['platform.msegmbh.net'],
+          allowedDomains: ['test.com'],
         },
       })
     ),
