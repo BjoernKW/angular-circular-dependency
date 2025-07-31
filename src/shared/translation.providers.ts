@@ -2,6 +2,7 @@ import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from
 import {importProvidersFrom, provideAppInitializer} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {firstValueFrom} from 'rxjs';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -22,9 +23,9 @@ export function provideTranslation() {
     ),
     {
       provide: provideAppInitializer,
-      useFactory: (translate: TranslateService) => () => {
+      useFactory: (translate: TranslateService) => async () => {
         translate.setDefaultLang('de');
-        return translate.use('de').toPromise();
+        return await firstValueFrom(translate.use('de'));
       },
       deps: [TranslateService],
       multi: true,
